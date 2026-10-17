@@ -1,0 +1,39 @@
+name: Validate template
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        profile: [server, static]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm audit --audit-level high
+      - name: Build and smoke test
+        env:
+          PROFILE: ${{ matrix.profile }}
+        run: |
+          if [ "$PROFILE" = static ]; then pnpm build:static; else pnpm build; fi
+          pnpm "smoke:$PROFILE"
+      - name: Verify server container
+        if: matrix.profile == 'server'
+        run: |
+          docker build -t frontend-template:check .
+          docker run -d --name frontend-template-check -p 3000:3000 frontend-template:check
+          curl --fail --retry 10 --retry-connrefused --retry-delay 2 http://localhost:3000/
+          docker stop --time 15 frontend-template-check
+      - name: Clean up container
+        if: always() && matrix.profile == 'server'
+        run: docker rm -f frontend-template-check || true

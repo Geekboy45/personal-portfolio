@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="redHalf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="100%" stop-color="#DC2626" />
+    </linearGradient>
+    <linearGradient id="whiteHalf" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E2E8F0" />
+    </linearGradient>
+  </defs>
+  <!-- Outer Dark Ring -->
+  <circle cx="16" cy="16" r="15" fill="#0F172A" />
+  <!-- Top Red Dome -->
+  <path d="M3 16 A 13 13 0 0 1 29 16 Z" fill="url(#redHalf)" />
+  <!-- Bottom White Dome -->
+  <path d="M3 16 A 13 13 0 0 0 29 16 Z" fill="url(#whiteHalf)" />
+  <!-- Center Horizontal Band -->
+  <rect x="2" y="14.5" width="28" height="3" fill="#0F172A" />
+  <!-- Center Outer Button -->
+  <circle cx="16" cy="16" r="5.2" fill="#0F172A" />
+  <!-- Center Inner Core -->
+  <circle cx="16" cy="16" r="3.2" fill="#FFFFFF" />
+  <!-- Central Silph Optical LED -->
+  <circle cx="16" cy="16" r="1.6" fill="#0284C7" />
+</svg>

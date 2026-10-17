@@ -1,0 +1,38 @@
+name: Build delivery artifact
+on:
+  workflow_call:
+    inputs:
+      profile:
+        required: true
+        type: string
+      stage:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm audit --audit-level high
+      - name: Package selected profile
+        env:
+          PROFILE: ${{ inputs.profile }}
+        run: |
+          case "$PROFILE" in
+            static) pnpm build:static; pnpm smoke:static; tar -czf frontend-artifact.tar.gz -C out . ;;
+            server) pnpm build; pnpm smoke:server; docker build -t frontend-template:artifact .; docker save frontend-template:artifact | gzip > frontend-artifact.tar.gz ;;
+            *) echo "Select a supported profile"; exit 1 ;;
+          esac
+      - uses: actions/upload-artifact@v4
+        with:
+          name: frontend-${{ inputs.stage }}-${{ inputs.profile }}
+          path: frontend-artifact.tar.gz
+          retention-days: 7

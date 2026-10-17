@@ -1,0 +1,13 @@
+name: Prepare prd delivery
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    uses: ./.github/workflows/build-artifact.yml
+    with:
+      profile: server
+      stage: prd
+# Artifact preparation only. Add authorized publication after selecting a host.
+# Keep the same profile in dev/prd when adapting this template.
