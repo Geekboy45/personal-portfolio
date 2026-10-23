@@ -33,13 +33,13 @@ export function getSiteMetadata(locale: Locale): Metadata {
     },
     alternates: siteConfig.canonicalOrigin
       ? {
-        canonical: sitePath(isEs ? "/es/" : "/"),
-        languages: {
-          en: sitePath("/"),
-          es: sitePath("/es/"),
-          "x-default": sitePath("/"),
-        },
-      }
+          canonical: sitePath(isEs ? "/es/" : "/"),
+          languages: {
+            en: sitePath("/"),
+            es: sitePath("/es/"),
+            "x-default": sitePath("/"),
+          },
+        }
       : undefined,
     robots: {
       index: siteConfig.isIndexable,
