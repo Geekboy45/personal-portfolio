@@ -6,6 +6,20 @@ These are accepted project rules, except items explicitly marked pending. Start 
 
 ## Deployment
 
+### Portfolio selection: GitHub Pages (2026-10-23)
+
+The owner selected GitHub Pages. This derived portfolio uses `DEPLOYMENT_PROFILE=static`, `CACHE_MODEL=traditional` and build-time Server Components, with existing client islands for interaction. No request-time Next.js runtime is needed. Provider-neutral server scripts and Docker support remain available for compatibility; they are not the Pages release target.
+
+- `deployment-prd.yml` validates, audits dependencies, builds and smoke-tests `out/`, uploads the Pages artifact, then publishes in a separate job. It runs on pushes to `main` and manual dispatch from `main`; other branches cannot publish. Production deployments are serialized without canceling a running release. The `github-pages` environment can impose additional approval rules.
+- The repository must first enable Settings → Pages → Source: GitHub Actions. No personal access token or GoDaddy credentials are needed. Read-only build permissions and deployment-only `pages: write` / `id-token: write` use the built-in GitHub token.
+- `configure-pages` supplies the current origin and base path at build time. `NEXT_PUBLIC_BASE_PATH` is empty at a custom domain or user site, and `/personal-portfolio` at this project site's default address. Next owns routed Link prefixes; `src/lib/site-path.ts` prefixes plain language links, public images and metadata. Never prefix a Next Link twice.
+- `deployment-dev.yml` prepares an unpublished, non-indexable static artifact. The generic `build-artifact.yml` retains both artifact profiles.
+- Public indexing defaults off. Set the repository Actions variable `ALLOW_INDEXING=true` only when ready for search indexing; production supplies `RELEASE_STAGE=production` and the verified Pages origin. Canonical URLs, language alternates and sitemap include the base path. Smoke checks cover both indexing modes.
+- Configure the real custom domain in GitHub Pages and its DNS externally, then rerun the production workflow. This rebuild removes the project prefix and updates canonical URLs; changing DNS alone does not rewrite the exported files. No custom domain is invented or hardcoded, and no CNAME file is needed with the Actions deployment.
+- Publication is implemented but not executed locally. First remote execution must verify Pages permissions, protected environments, nested `/es/` refresh, images, 404 and HTTPS at the actual host. Dedicated SAST and secret tooling remain pending.
+
+The general profile rules below remain applicable; older references to unselected hosting describe the provider-neutral baseline, superseded for this portfolio by the selection above.
+
 - Profile selection is mandatory before project implementation. Record DEPLOYMENT_PROFILE as exactly server or static in the project's documented build configuration and README, alongside its reason, rendering/data-fetching strategy, and server/client boundaries. CI and next.config.ts must use the same explicit selection; fail validation for a missing/unknown value rather than silently falling back or inspecting a hostname. The template's current architecture-definition stage does not itself select a profile for a future project.
 - Keep profile selection separate from development/production environment selection: deployment-dev.yml and deployment-prd.yml use the project's same selected profile. A profile change is an architectural change requiring a compatibility review, not merely a different deployment destination.
 - Provide GitHub Actions workflows named deployment-dev.yml and deployment-prd.yml under .github/workflows when deployment is implemented.

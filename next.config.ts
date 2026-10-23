@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { siteBasePath } from "./src/lib/site-path";
 
 const profile = process.env.DEPLOYMENT_PROFILE;
 if (profile !== "server" && profile !== "static") {
@@ -10,6 +11,7 @@ if (process.env.CACHE_MODEL !== "traditional") {
   throw new Error("This starter implements CACHE_MODEL=traditional only.");
 }
 const config: NextConfig = {
+  basePath: siteBasePath,
   output: profile === "static" ? "export" : "standalone",
   cacheComponents: false,
   reactStrictMode: true,

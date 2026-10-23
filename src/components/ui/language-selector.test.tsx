@@ -36,3 +36,28 @@ it("switches translated consumers without relabeling untranslated content when s
   expect(esButton).toHaveAttribute("aria-pressed", "true");
   expect(document.documentElement.lang).toBe("en");
 });
+
+it("uses the route locale even when an opposite browser preference is stored", () => {
+  localStorage.setItem("portfolio_locale", "en");
+  render(
+    <LocaleProvider routeLocale="es">
+      <LanguageSelector />
+      <SampleConsumer />
+    </LocaleProvider>,
+  );
+  expect(screen.getByTestId("msg")).toHaveTextContent(
+    "Registro de Especímenes",
+  );
+  expect(screen.getByRole("link", { name: "Español" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  expect(screen.getByRole("link", { name: "Español" })).toHaveAttribute(
+    "href",
+    "/es/",
+  );
+  expect(screen.getByRole("link", { name: "English" })).toHaveAttribute(
+    "href",
+    "/",
+  );
+});

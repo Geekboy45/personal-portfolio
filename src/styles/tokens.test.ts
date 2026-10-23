@@ -17,6 +17,10 @@ it.each([
   ["--color-danger-foreground", "--color-danger", 4.5],
   ["--color-muted-foreground", "--color-surface-muted", 4.5],
   ["--color-focus", "--color-surface-raised", 3],
+  ["--color-primary", "--color-surface", 4.5],
+  ["--color-primary-foreground", "--color-primary", 4.5],
+  ["--color-success", "--color-success-surface", 4.5],
+  ["--color-inverse-accent", "--color-foreground", 4.5],
 ])("checks contrast between %s and %s", (foreground, background, minimum) => {
   const a = luminance(foreground),
     b = luminance(background);

@@ -7,7 +7,6 @@ jobs:
   prepare:
     uses: ./.github/workflows/build-artifact.yml
     with:
-      profile: server
+      profile: static
       stage: dev
-# Artifact preparation only. Add authorized publication after selecting a host.
-# Keep the same profile in dev/prd when adapting this template.
+# Development builds remain unpublished and non-indexable.

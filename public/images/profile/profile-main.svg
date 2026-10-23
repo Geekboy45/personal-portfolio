@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#94A3B8" stroke-width="0.5" stroke-opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="400" height="400" rx="24" fill="url(#bgGrad)"/>
+  <rect width="400" height="400" rx="24" fill="url(#grid)"/>
+
+  <!-- Technical Ring -->
+  <circle cx="200" cy="180" r="110" fill="none" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <circle cx="200" cy="180" r="95" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Stylized Engineering Portrait Silhouette -->
+  <g fill="none" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Head -->
+    <path d="M 175 145 C 175 130, 225 130, 225 145 C 225 170, 220 185, 200 190 C 180 185, 175 170, 175 145 Z" fill="#F1F5F9"/>
+    <!-- Glasses / Tech Frame -->
+    <rect x="180" y="148" width="16" height="12" rx="3" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <rect x="204" y="148" width="16" height="12" rx="3" stroke="#0284C7" stroke-width="2" fill="none"/>
+    <path d="M 196 154 L 204 154" stroke="#0284C7" stroke-width="2"/>
+    <!-- Shoulders -->
+    <path d="M 140 250 C 145 205, 175 200, 200 200 C 225 200, 255 205, 260 250" fill="#F8FAFC" stroke="#0F172A"/>
+    <!-- Collar / Shirt Detail -->
+    <path d="M 188 202 L 200 220 L 212 202" stroke="#475569" stroke-width="1.5"/>
+  </g>
+
+  <!-- Tech Badges -->
+  <g font-family="monospace" font-size="9" font-weight="600">
+    <rect x="40" y="325" width="320" height="36" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+    <circle cx="58" cy="343" r="4" fill="#10B981"/>
+    <text x="70" y="346" fill="#0F172A" letter-spacing="1">LUIS ÁNGEL ELIZONDO · TECH LEAD</text>
+  </g>
+
+  <!-- Coordinate Reticles -->
+  <line x1="200" y1="50" x2="200" y2="65" stroke="#0284C7" stroke-width="1.5"/>
+  <line x1="200" y1="295" x2="200" y2="310" stroke="#0284C7" stroke-width="1.5"/>
+  <line x1="70" y1="180" x2="85" y2="180" stroke="#0284C7" stroke-width="1.5"/>
+  <line x1="315" y1="180" x2="330" y2="180" stroke="#0284C7" stroke-width="1.5"/>
+</svg>

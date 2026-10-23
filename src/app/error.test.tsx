@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, it, vi } from "vitest";
-import ErrorPage from "./error";
+import ErrorPage from "./(english)/error";
 
 it("offers recovery without inventing a diagnostic reference or successful logging", async () => {
   const reset = vi.fn();

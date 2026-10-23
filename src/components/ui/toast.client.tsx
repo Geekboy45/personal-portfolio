@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { CheckIcon, CloseIcon, SparklesIcon } from "@/components/ui/icons";
+import { useLocale } from "@/lib/i18n.client";
 
 export type ToastVariant = "success" | "info" | "error";
 
@@ -28,6 +29,7 @@ interface ToastContextValue {
 const ToastContext = createContext<ToastContextValue | null>(null);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
+  const { locale } = useLocale();
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   const dismissToast = useCallback((id: string) => {
@@ -58,8 +60,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {children}
       {/* Fixed bottom-right notification portal */}
       <aside
-        aria-label="Notifications"
-        className="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0"
+        aria-label={locale === "es" ? "Notificaciones" : "Notifications"}
+        className="pointer-events-none fixed inset-x-4 bottom-6 z-50 flex flex-col gap-3 sm:left-auto sm:right-6 sm:w-96"
       >
         {toasts.map((toast) => (
           <ToastCard key={toast.id} toast={toast} onDismiss={dismissToast} />
@@ -83,6 +85,7 @@ function ToastCard({
   onDismiss: (id: string) => void;
 }) {
   const { title, description, variant = "success", durationMs = 4500 } = toast;
+  const { locale } = useLocale();
 
   const dismiss = useEffectEvent(() => onDismiss(toast.id));
 
@@ -94,50 +97,36 @@ function ToastCard({
     return () => clearTimeout(timer);
   }, [durationMs]);
 
-  const borderClass =
-    variant === "success"
-      ? "border-success"
-      : variant === "error"
-        ? "border-danger"
-        : "border-border";
-
   const iconBg =
     variant === "success"
-      ? "bg-success-surface text-success"
+      ? "bg-success text-success-foreground"
       : variant === "error"
-        ? "bg-danger-surface text-danger"
-        : "bg-surface-muted text-primary";
+        ? "bg-danger text-danger-foreground"
+        : "bg-primary text-primary-foreground";
 
   return (
     <div
       role={variant === "error" ? "alert" : "status"}
       aria-live={variant === "error" ? "assertive" : "polite"}
-      className={`pointer-events-auto flex items-start gap-3 rounded-panel border ${borderClass} bg-surface-raised p-4 shadow-panel transition-colors motion-reduce:transition-none`}
+      className="pointer-events-auto flex items-center gap-3 rounded-xl border border-inverse-foreground/15 bg-foreground p-3 text-inverse-foreground shadow-elevated"
     >
       <div
-        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${iconBg}`}
+        aria-hidden="true"
+        className={`flex size-10 shrink-0 items-center justify-center rounded-control ${iconBg}`}
       >
         {variant === "success" ? (
-          <CheckIcon size={14} className="text-success" />
+          <CheckIcon size={20} />
+        ) : variant === "error" ? (
+          <CloseIcon size={20} />
         ) : (
-          <SparklesIcon size={14} />
+          <SparklesIcon size={20} />
         )}
       </div>
 
       <div className="flex-1 min-w-0 pr-1">
-        <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">
-            NOTIFICATION
-          </span>
-          <span className="font-mono text-[10px] text-muted-foreground">
-            · NOW
-          </span>
-        </div>
-        <h3 className="font-sans text-xs font-bold text-foreground mt-0.5">
-          {title}
-        </h3>
+        <h3 className="text-sm font-semibold leading-snug">{title}</h3>
         {description && (
-          <p className="mt-0.5 font-sans text-xs text-muted-foreground leading-relaxed">
+          <p className="mt-1 break-words text-xs leading-relaxed text-inverse-foreground/75 [overflow-wrap:anywhere]">
             {description}
           </p>
         )}
@@ -146,10 +135,12 @@ function ToastCard({
       <button
         type="button"
         onClick={() => onDismiss(toast.id)}
-        aria-label="Dismiss notification"
-        className="shrink-0 rounded-full p-1 text-muted-foreground hover:bg-surface-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-focus"
+        aria-label={
+          locale === "es" ? "Cerrar notificación" : "Dismiss notification"
+        }
+        className="flex size-11 shrink-0 items-center justify-center rounded-control text-inverse-foreground/70 transition-colors hover:bg-inverse-foreground/10 hover:text-inverse-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-inverse-accent"
       >
-        <CloseIcon size={13} />
+        <CloseIcon size={16} />
       </button>
     </div>
   );
@@ -175,7 +166,7 @@ export function StandaloneToast({
 }) {
   if (!open) return null;
   return (
-    <div className="fixed bottom-5 right-5 z-50 max-w-sm px-4">
+    <div className="fixed inset-x-4 bottom-6 z-50 sm:left-auto sm:right-6 sm:w-96">
       <ToastCard
         toast={{ id: "standalone", title, description, variant, durationMs }}
         onDismiss={onClose}

@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-frontend-template",
+  "name": "luis-elizondo-portfolio",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -31,10 +31,10 @@
     "smoke:static": "node scripts/smoke.mjs static"
   },
   "dependencies": {
-    "@gsap/react": "^2.1.2",
+    "@gsap/react": "2.1.2",
     "@radix-ui/react-dialog": "1.3.1",
     "@tanstack/react-query": "5.104.3",
-    "gsap": "^3.15.0",
+    "gsap": "3.15.0",
     "next": "16.4.2",
     "react": "19.3.1",
     "react-dom": "19.3.1",

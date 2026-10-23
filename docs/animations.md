@@ -6,7 +6,7 @@ These are accepted project rules, except items explicitly marked pending. Start 
 
 ## Status and decision record
 
-No animation library is installed in this template. The policy below governs how one may be added; it is not a recommendation to add one. Reviewed against official sources on 2026-10-17 (see [references](#references)); recheck version-specific APIs against the versions actually installed.
+The portfolio combines native CSS microinteractions with a scoped GSAP/ScrollTrigger career narrative. The legacy specimen component is not composed into the route. The project record below describes adoption and remaining production acceptance evidence; dependency presence alone is not evidence of acceptance. Reviewed against official sources on 2026-10-17 (see [references](#references)); recheck version-specific APIs against the versions actually installed.
 
 | Decision                                                                                           | Status                                                                                                                                                               |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -94,11 +94,11 @@ Rules:
 
 ### Project adoption record
 
-Derived projects fill this table when they adopt a library. The template adopts none.
+Derived projects fill this table when they adopt a library. Legacy dependencies without completed intake remain explicitly unaccepted.
 
-| Library | Version (lockfile) | Tier | Justification | Routes/components | Measured impact | License review date |
-| ------- | ------------------ | ---- | ------------- | ----------------- | --------------- | ------------------- |
-| None    | —                  | —    | —             | —                 | —               | —                   |
+| Library            | Version (lockfile)        | Tier | Justification                        | Routes/components                                        | Measured impact                               | License review date |
+| ------------------ | ------------------------- | ---- | ------------------------------------ | -------------------------------------------------------- | --------------------------------------------- | ------------------- |
+| GSAP + @gsap/react | 3.15.0 / 2.1.2 (lockfile) | 3    | Career SVG synchronized with reading | CareerStoryMotion and EducationGallery on `/` and `/es/` | Current footprint in review; baseline pending | 2026-10-17          |
 
 ## Next.js and React integration
 
@@ -252,3 +252,38 @@ Reviewed 2026-10-17. Verify against installed versions.
 - GSAP license: https://gsap.com/standard-license
 - dotLottie React: https://developers.lottiefiles.com/docs/dotlottie-player/dotlottie-react/
 - Playwright emulateMedia: https://playwright.dev/docs/api/class-page#page-emulate-media
+
+## Portfolio motion decision (2026-10-17)
+
+Historical initial CSS-entry decision; the later real-portfolio amendment below supersedes the hero-entry and per-section-control details.
+
+The portfolio hero uses Tier 1 only: two finite, transform-only entrance durations (700/950 ms) and hover/focus transitions. Shared values and keyframes live in `src/styles/tokens.css`. Content is visible at every frame, including with JavaScript unavailable. `motion-safe:` gates entries and the document reduced-motion rule disables animation and transitions. No scroll pinning, observers, timers, looping decoration, or additional dependency is required. Numeric evidence is displayed immediately in a Server Component instead of counting through intermediate values. No motion-specific pause control is needed for these sub-second entries; the template motion-control decision remains pending for other animation.
+
+Browser acceptance and performance measurement are tracked in [the portfolio review](portfolio-review.md). Do not treat development-preview inspection as production animation acceptance.
+
+## Career-story adoption and motion controls (2026-10-17)
+
+- Functional need: a multi-stage SVG illustration changes alongside three server-rendered career chapters. Native sticky layout preserves ordinary scrolling; there is no ScrollTrigger pinning or scroll-jacking. Simple entrance/hover effects remain CSS-owned, on different elements/properties.
+- Native CSS transitions cannot synchronize this staged sequence with reading progress. Native scroll timelines were considered; no cross-browser support matrix has been accepted. Existing GSAP core, ScrollTrigger and the official React lifecycle integration fit the choreography without installing another library or building a custom scroll engine.
+- Installed `@gsap/react` 2.1.2 declares React >=17 and GSAP ^3.12.5 peers, covering installed React 19.3.1 and GSAP 3.15.0. Next 16.4.2 server and export builds are verified separately. Targeted browser checks and remaining limits are recorded in [the review](portfolio-review.md).
+- License text reviewed on 2026-10-17: [GSAP Standard License](https://gsap.com/community/standard-license/). This personal portfolio displays animation; it does not provide a visual animation-building product. The license's permitted website use fits this scope. It is not an unrestricted permissive license.
+- Maintenance/intake: use existing pinned packages only, no CDN or third-party runtime assets, no new dependency and no player/WASM. The previous production dependency audit reported no known vulnerabilities; that does not establish future security or production performance.
+- Loading/isolation: only `career-story.client.tsx` and `education-gallery.client.tsx` import GSAP and ScrollTrigger. The server page/shell/narrative/metrics/project summaries remain server-owned. The reference explorer does not import the career engine. Both CSS entrance and SVG animation are retained because they own independent properties and only the SVG needs a timeline.
+- Lifecycle exception: `useGSAP` scopes selectors to one component and uses `revertOnUpdate`. Its returned matchMedia cleanup reverts the active sequence on toggle, live media change, Strict Mode cleanup and unmount. React preference subscriptions remove their listeners. No application-owned scroll listener, frame loop or observer is added. Scoped lifecycle tests exercise disposal, disable/re-enable and live reduced-motion replacement.
+- Controls: the shared footer checkbox is keyboard-operable, controls both sequences and persists a local user preference. OS reduced motion always wins and starts static; viewports below 768 CSS pixels also use the readable static illustration and compact chapter flow. There is no continuous/autoplay loop. Disabling tears down the timeline and restores static SVG attributes rather than hiding the region.
+- Fallback: narrative text and a complete decorative SVG exist in HTML. No text, link or photo depends on animation progress. Module/runtime-failure and JavaScript-disabled browser scenarios remain explicit acceptance checks, not inferred solely from unit tests.
+- Performance: SVG transforms/opacity and four short dashed paths are the only changing properties; the small path paint is deliberate, while layout remains native. Route bundle footprint is recorded in the review; full baseline/delta CWV, frame and memory measurements remain pending. Do not report field compliance or full animation-policy acceptance from a single browser run.
+
+## Vertical-to-horizontal education gallery amendment (2026-10-17)
+
+The user explicitly requested horizontal photo movement driven by downward page scrolling. `education-gallery.client.tsx` therefore adopts a bounded ScrollTrigger pin with automatic spacing and a scrubbed transform on one inner track. The start is below the sticky header; photo height is bounded by the viewport, images reserve their dimensions, and `invalidateOnRefresh` recalculates the horizontal distance. The document keeps native wheel, touch, keyboard and anchor behavior. This is a pinned visual sequence, not a smooth-scroll replacement or wheel interception mechanism.
+
+The gallery consumes shared motion preferences through `src/lib/reduced-motion.client.ts`. The unobtrusive footer accessibility checkbox controls both sequences; no technical enable/disable buttons appear inside sections. Reduced motion always starts/keeps manual mode. Disabling reverts the tween, overflow styles and pin spacer; native horizontal scrolling and keyboard-focusable previous/next controls remain. Without JavaScript the native region is readable and scrollable. Previous/next in animated mode move native page scroll to the relevant chapter position; in manual mode they move the native horizontal viewport immediately. No timed autoplay is present.
+
+This is a second documented `useGSAP` lifecycle exception: CSS transitions cannot coordinate the requested pin and vertical reading progress across the unselected scroll-timeline browser matrix. The official integration owns teardown and replacement with `revertOnUpdate`. Scoped tests keep real GSAP context/style restoration under Strict Mode; production checks verify actual translation and pin removal. Both feature engines share the existing GSAP bundle and use independent scoped targets; neither competes with CSS on an animated property.
+
+## Real-portfolio motion UI amendment (2026-10-17)
+
+This is the user's actual portfolio, not a template demonstration. Per-section animation/debug controls were removed at the user's request. A single unobtrusive footer checkbox, “Reduce motion” / “Reducir movimiento”, is the accessibility mechanism for both scroll sequences. The explicit user preference persists under `portfolio-reduced-motion`; if browser storage rejects writes, the session preference still works. OS reduced motion always wins and cannot be overridden by this control. The server snapshot is static/reduced until hydration determines the preference. Subscriptions release media/storage/custom-event listeners on disposal.
+
+Checking the footer option reverts the career timeline and gallery tween/pin/overflow styles. The static illustration, all text and native horizontally scrollable photos remain. Unchecking it restores the effects only when the OS permits. The choice is not presented as a demo control. Hero entry movement and hover translation were removed so a persisted reduced-motion choice does not leave separate CSS movement running. Color/focus feedback remains native CSS. Meaningful regression tests cover shared teardown, preference replacement and storage rejection.

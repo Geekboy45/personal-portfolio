@@ -17,6 +17,7 @@ if (configuredOrigin) {
   }
   canonicalOrigin = url.origin;
 }
+
 if (
   isIndexable &&
   (!canonicalOrigin || process.env.RELEASE_STAGE !== "production")
@@ -25,12 +26,13 @@ if (
     "Indexing requires an explicit canonical origin and RELEASE_STAGE=production.",
   );
 }
+
 export const siteConfig = {
-  name: "Silph Pokémon Laboratory",
-  titleTemplate: "%s | Silph Pokémon Laboratory",
-  defaultTitle: "Silph Pokémon Laboratory | Fieldnotes & Biological Telemetry",
+  name: "Luis Elizondo | Tech Lead & Software Engineer",
+  titleTemplate: "%s | Luis Elizondo",
+  defaultTitle: "Luis Elizondo | Tech Lead & Software Engineer",
   description:
-    "A precision field guide and Pokédex device for biological specimen research, telemetry, and canonical Pokédex observations.",
+    "Tech Lead & Software Engineer building scalable cloud systems, automation platforms and data-driven products. Engineering, Cloud, AI & Business Impact.",
   canonicalOrigin,
   locale: "en-US",
   isIndexable,

@@ -1,13 +1,55 @@
-name: Prepare prd delivery
+name: Deploy portfolio to GitHub Pages
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 permissions:
   contents: read
+concurrency:
+  group: github-pages-production
+  cancel-in-progress: false
 jobs:
-  prepare:
-    uses: ./.github/workflows/build-artifact.yml
-    with:
-      profile: server
-      stage: prd
-# Artifact preparation only. Add authorized publication after selecting a host.
-# Keep the same profile in dev/prd when adapting this template.
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm audit --audit-level high
+      - name: Read Pages URL and custom domain
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build and verify static site
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_ORIGIN: ${{ steps.pages.outputs.origin }}
+          ALLOW_INDEXING: ${{ vars.ALLOW_INDEXING == 'true' && 'true' || 'false' }}
+          RELEASE_STAGE: production
+        run: |
+          pnpm build:static
+          pnpm smoke:static
+      - name: Upload static Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: out
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish verified artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

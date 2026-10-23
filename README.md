@@ -1,31 +1,39 @@
-# Next.js frontend template
+# Luis Elizondo — Personal portfolio
 
-A replaceable PokéAPI reference frontend. No database, authentication provider or deployment host is configured.
+A bilingual professional portfolio: English at `/` and Spanish at `/es/`. Pages are prerendered, with small client boundaries for scroll storytelling, the education gallery and clipboard actions.
 
 ## Run and verify
 
-Use Node **24.22.0** and pnpm **11.25.0**, then `pnpm install --frozen-lockfile`.
+Use Node **24.22.0** and pnpm **11.25.0**. Install reproducibly with `pnpm install --frozen-lockfile`.
 
 | Task                                 | Command                                      |
 | ------------------------------------ | -------------------------------------------- |
-| Develop server profile               | `pnpm dev`                                   |
-| Develop static profile               | `pnpm dev:static`                            |
+| Local development                    | `pnpm dev`                                   |
+| Static-profile development           | `pnpm dev:static`                            |
 | Format, lint, strict types and tests | `pnpm check`                                 |
-| Server artifact and smoke            | `pnpm build` then `pnpm smoke:server`        |
-| Static artifact and smoke            | `pnpm build:static` then `pnpm smoke:static` |
+| Server production artifact and smoke | `pnpm build` then `pnpm smoke:server`        |
+| Static production artifact and smoke | `pnpm build:static` then `pnpm smoke:static` |
 
-Build/smoke profiles sequentially: they share `.next`. `out/` is the static artifact; `.next/standalone` and the Dockerfile supply the server artifact. Named scripts explicitly select the deployment profile and traditional caching. A derived project must select one profile in its scripts and delivery workflows before adding runtime-dependent features. Both delivery workflows currently prepare server artifacts; neither publishes to a hosting provider.
+Build profiles sequentially because they share `.next`. The selected deployment is GitHub Pages using the static profile and traditional caching: `out/` is the published artifact. `.next/standalone` remains available for portable Node hosting. The portfolio requires no request-time Next.js runtime.
 
-The landing is generated at build time. The explorer owns browser queries to public PokéAPI through a feature-scoped TanStack Query client: 5-minute freshness, 10-minute inactive retention, no retries. The transport retains its 15-second deadline through body transfer. Name/ID search has a bounded catalog exception in [performance policy](docs/performance.md), not a general platform-search pattern.
+## Content and photography
 
-## Replace the demonstration
+Public bilingual editorial content lives in `src/data`. Local typed content is permitted by the architecture; private implementation details and client documents do not belong in public content or assets. `src/features/portfolio/portfolio-page.tsx` composes the server-rendered sections. Project summaries intentionally omit internal diagrams and pipelines.
 
-- Replace `src/features/pokemon` and route composition; retain the HTTP contract and meaningful tests.
-- Map brand values in `src/styles/tokens.css`. Remove the Pokémon domain token group with the demo. Shared UI primitives contain no Pokémon behavior.
-- The observation form persists only non-sensitive demo drafts. It validates stored data, provides deletion, and ignores drafts after seven days; expiry does not erase bytes from browser storage. Design identity isolation separately before adding authenticated persistence.
-- Public indexing is off. Configure a real HTTPS `NEXT_PUBLIC_SITE_ORIGIN`, `ALLOW_INDEXING=true` and `RELEASE_STAGE=production` deliberately at build time for a public project. Noindex builds publish an empty sitemap. See [SEO policy](docs/ui.md#landing-page-seo).
-- Authentication/session integration, production telemetry, dedicated SAST/secret tools and hosting remain pending. The transport callback is not an installed monitoring system. Automated keyboard/contrast tests do not establish complete WCAG conformance.
+The education gallery includes three Tec de Monterrey photos: the Business School Top 1% award, graduation and the EXATEC SELIT conference. Graduation uses a narrower portrait frame without cropping. Edit reviewed local paths and bilingual alt text in `src/data/education-gallery.ts`.
 
-ESLint 9 is temporarily pinned to satisfy the installed lint-plugin peer ranges and is deprecated upstream. Track its replacement as a coordinated toolchain upgrade; see [architecture](docs/architecture.md#executable-baseline-and-purity). Do not suppress checks or silently upgrade unrelated major versions.
+The education gallery moves horizontally while the visitor scrolls down, then releases the page back into ordinary vertical flow. The footer's accessibility preference and OS reduced motion switch both storytelling sequences to their static/manual variants. The footer choice persists locally when storage is available; there are no per-section animation debug controls, timers or autoplay.
 
-Start navigation with [AGENTS.md](AGENTS.md) and the [code map](docs/code-map.md).
+## Configuration and release
+
+Enable **repository Settings → Pages → Build and deployment → Source: GitHub Actions**. Push to `main`, or run **Actions → Deploy portfolio to GitHub Pages → Run workflow** on `main`. The workflow installs pinned tooling, runs `pnpm check` and the dependency audit, builds/smoke-tests the static site, then publishes `out/` in a separate job. Development artifact preparation remains manual and does not publish. No extra deployment secret is required.
+
+The workflow reads the Pages origin and base path automatically. The current repository works at `https://geekboy45.github.io/personal-portfolio/`; local URLs remain at `/`. After configuring a custom domain in Pages and DNS, rerun the production workflow to rebuild without the repository prefix. Do not set `NEXT_PUBLIC_BASE_PATH` manually in GitHub. For an equivalent local project-path build, set it to `/personal-portfolio` for both `pnpm build:static` and `pnpm smoke:static`, then clear it before normal local builds.
+
+Search indexing remains off by default. To enable it, add repository **Settings → Secrets and variables → Actions → Variables → `ALLOW_INDEXING` = `true`**, then rerun the workflow. Pages supplies the real origin; no placeholder domain is published. The `github-pages` environment may require approval if configured in GitHub. See [deployment](docs/deployment.md#portfolio-selection-github-pages-2026-10-23).
+
+Design roles belong to `src/styles/tokens.css`. Public indexing remains off unless a real `NEXT_PUBLIC_SITE_ORIGIN`, `ALLOW_INDEXING=true` and `RELEASE_STAGE=production` are deliberately supplied at build time. Canonical/reciprocal language alternates are emitted only with a configured origin. Both language versions are actual static routes with correct document language; browser storage cannot override the route.
+
+The original Pokémon reference modules and tests remain in source while shared infrastructure is retained; `/explore/` is no longer a public route and must return 404. They are not portfolio content. There is no database, authentication provider or business backend.
+
+See [AGENTS.md](AGENTS.md), [code map](docs/code-map.md), [motion policy](docs/animations.md) and [current review](docs/portfolio-review.md) for accepted constraints and actual verification limits. Dedicated SAST/secret tooling remains pending; passing tests do not establish WCAG or security certification. Remote Pages publication and domain/DNS configuration must still be verified on GitHub and the DNS provider.

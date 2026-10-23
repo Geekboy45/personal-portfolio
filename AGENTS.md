@@ -1,8 +1,8 @@
-# Next.js frontend template
+# Personal portfolio
 
 ## Status and authority
 
-An executable Pokémon reference frontend is implemented on **Next.js 16.4.2**. Both explicit server/static scripts use traditional caching. See [README](README.md) for commands and [code map](docs/code-map.md) for implemented modules; derived projects must select their own profile.
+A bilingual personal portfolio is implemented on **Next.js 16.4.2**. Both explicit server/static scripts use traditional caching. See [README](README.md) for commands and [code map](docs/code-map.md) for implemented modules; derived projects must select their own profile.
 
 This file is the compact entry point. The linked topic documents contain the full accepted rules and are mandatory for the work they cover. Read only applicable sections and their relevant cross-references; do not preload all documentation. Examples are not mandatory scaffolding. Pending choices are not approved requirements. Surface genuine conflicts; do not silently weaken a rule.
 
@@ -49,7 +49,7 @@ This file is the compact entry point. The linked topic documents contain the ful
 
 Keep unresolved choices explicit in their owning document: auth/session integration; field-error wire format and error-code catalog; project-specific query policy; dedicated form/security/telemetry tooling; project design values/device matrix; animation library selection, budgets and motion-control design (a project decision is mandatory before publishing animation that needs pause/stop/disable); hosting and release policies. A preferred conditional library is not a requirement to install it in every project.
 
-No deployment target or publishing credentials are selected. Keep the existing provider-neutral server/static profiles and deployment-dev.yml/deployment-prd.yml conventions. Preserve documented decisions unless the user changes them.
+GitHub Pages is selected for this portfolio using the static profile and traditional caching. Production publishes verified `out/` through GitHub Actions; development only prepares a static artifact. Keep the provider-neutral server/static scripts and deployment-dev.yml/deployment-prd.yml conventions. Domain/DNS setup remains external. See docs/deployment.md for the accepted release policy.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

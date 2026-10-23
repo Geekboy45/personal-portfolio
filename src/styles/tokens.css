@@ -4,118 +4,77 @@
   --color-danger-surface: #fef2f2;
   --color-warning: #854d0e;
   --color-warning-surface: #fefce8;
-  /* Replaceable Pokémon device roles; no feature palette lives in TSX. */
-  --color-device-shell: #dc2626;
-  --color-device-shell-dark: #b91c1c;
-  --color-device-shell-border: #7f1d1d;
-  --color-inverse-foreground: #ffffff;
-  --color-device-lens: #0ea5e9;
-  --color-device-lens-light: #67e8f9;
-  --color-device-lens-dark: #1d4ed8;
-  --color-device-indicator: #fbbf24;
-  --color-device-control: #0e1116;
-  --shadow-device: 0 25px 60px -15px rgb(0 0 0 / 0.6);
-  --shadow-device-lens: 0 0 15px rgb(56 189 248 / 0.8);
-  --shadow-device-indicator: 0 0 8px currentColor;
-  --shadow-device-dot: 0 0 4px currentColor;
-  --color-surface: #f7f8fa;
+
+  /* Editorial high-precision light theme tokens */
+  --color-surface: #fafaf7;
   --color-surface-raised: #ffffff;
-  --color-surface-muted: #f1f3f6;
-  --color-foreground: #0e1116;
-  --color-muted-foreground: #5f697d;
-  --color-primary: #0f766e;
-  --color-primary-hover: #0b5f59;
+  --color-surface-subtle: #f5f6f2;
+  --color-surface-muted: #eef0eb;
+  --color-foreground: #192724;
+  --color-muted-foreground: #52605a;
+  --color-tertiary-foreground: #63716b;
+
+  /* Portfolio actions and contrast partners */
+  --color-primary: #2454d6;
+  --color-primary-hover: #1e40af;
   --color-primary-foreground: #ffffff;
-  --color-border: rgba(14, 17, 22, 0.08);
-  --color-focus: #0f766e;
-  --color-success: #166534;
+  --color-primary-subtle: #edf2ff;
+
+  /* Border and focus */
+  --color-border: #dce1da;
+  --color-border-subtle: rgba(15, 23, 42, 0.06);
+  --color-focus: #2454d6;
+
+  /* Status accents */
+  --color-success: #16724b;
+  --color-success-foreground: #ffffff;
   --color-danger: #b91c1c;
   --color-danger-foreground: #ffffff;
   --color-error-foreground: #b91c1c;
-  --color-overlay: rgba(14, 17, 22, 0.4);
-  --radius-sm: 10px;
-  --radius-control: 12px;
-  --radius-panel: 14px;
-  --radius-xl: 18px;
+  --color-overlay: rgba(15, 23, 42, 0.4);
+
+  --color-inverse-accent: #b7ceff;
+
+  /* Geometry & elevation */
+  --radius-sm: 8px;
+  --radius-control: 10px;
+  --radius-panel: 20px;
+  --radius-xl: 16px;
+
   --shadow-panel:
-    0 4px 20px -2px rgba(14, 17, 22, 0.05),
-    0 12px 32px -4px rgba(14, 17, 22, 0.08);
+    0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+  --shadow-elevated:
+    0 4px 6px -1px rgba(15, 23, 42, 0.04),
+    0 10px 24px -3px rgba(15, 23, 42, 0.08);
+
+  /* Typography */
   --font-sans:
     "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-display: "Geist", "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
-  /* Elemental classification roles, removable with the Pokémon feature. */
-  --color-pokemon-fire-surface: rgba(255, 107, 61, 0.12);
-  --color-pokemon-fire-foreground: #c2410c;
-  --color-pokemon-fire-border: rgba(255, 107, 61, 0.35);
-  --color-pokemon-fire-indicator: #ea580c;
-  --color-pokemon-water-surface: rgba(59, 158, 255, 0.12);
-  --color-pokemon-water-foreground: #075985;
-  --color-pokemon-water-border: rgba(59, 158, 255, 0.35);
-  --color-pokemon-water-indicator: #0284c7;
-  --color-pokemon-grass-surface: rgba(34, 197, 94, 0.12);
-  --color-pokemon-grass-foreground: #15803d;
-  --color-pokemon-grass-border: rgba(34, 197, 94, 0.35);
-  --color-pokemon-grass-indicator: #16a34a;
-  --color-pokemon-electric-surface: rgba(245, 197, 24, 0.15);
-  --color-pokemon-electric-foreground: #a16207;
-  --color-pokemon-electric-border: rgba(245, 197, 24, 0.4);
-  --color-pokemon-electric-indicator: #ca8a04;
-  --color-pokemon-ice-surface: rgba(94, 225, 230, 0.18);
-  --color-pokemon-ice-foreground: #0e7490;
-  --color-pokemon-ice-border: rgba(94, 225, 230, 0.4);
-  --color-pokemon-ice-indicator: #0891b2;
-  --color-pokemon-psychic-surface: rgba(255, 92, 154, 0.12);
-  --color-pokemon-psychic-foreground: #be185d;
-  --color-pokemon-psychic-border: rgba(255, 92, 154, 0.35);
-  --color-pokemon-psychic-indicator: #db2777;
-  --color-pokemon-dragon-surface: rgba(91, 108, 255, 0.12);
-  --color-pokemon-dragon-foreground: #4338ca;
-  --color-pokemon-dragon-border: rgba(91, 108, 255, 0.35);
-  --color-pokemon-dragon-indicator: #4f46e5;
-  --color-pokemon-ghost-surface: rgba(123, 104, 217, 0.12);
-  --color-pokemon-ghost-foreground: #6d28d9;
-  --color-pokemon-ghost-border: rgba(123, 104, 217, 0.35);
-  --color-pokemon-ghost-indicator: #7c3aed;
-  --color-pokemon-fairy-surface: rgba(245, 158, 216, 0.18);
-  --color-pokemon-fairy-foreground: #9d174d;
-  --color-pokemon-fairy-border: rgba(245, 158, 216, 0.4);
-  --color-pokemon-fairy-indicator: #be185d;
-  --color-pokemon-steel-surface: rgba(127, 163, 184, 0.18);
-  --color-pokemon-steel-foreground: #334155;
-  --color-pokemon-steel-border: rgba(127, 163, 184, 0.4);
-  --color-pokemon-steel-indicator: #475569;
-  --color-pokemon-poison-surface: rgba(168, 85, 247, 0.12);
-  --color-pokemon-poison-foreground: #7e22ce;
-  --color-pokemon-poison-border: rgba(168, 85, 247, 0.35);
-  --color-pokemon-poison-indicator: #9333ea;
-  --color-pokemon-ground-surface: rgba(217, 119, 6, 0.12);
-  --color-pokemon-ground-foreground: #b45309;
-  --color-pokemon-ground-border: rgba(217, 119, 6, 0.35);
-  --color-pokemon-ground-indicator: #d97706;
-  --color-pokemon-rock-surface: rgba(161, 98, 7, 0.15);
-  --color-pokemon-rock-foreground: #78350f;
-  --color-pokemon-rock-border: rgba(161, 98, 7, 0.4);
-  --color-pokemon-rock-indicator: #92400e;
-  --color-pokemon-flying-surface: rgba(96, 165, 250, 0.15);
-  --color-pokemon-flying-foreground: #1d4ed8;
-  --color-pokemon-flying-border: rgba(96, 165, 250, 0.4);
-  --color-pokemon-flying-indicator: #2563eb;
-  --color-pokemon-bug-surface: rgba(132, 204, 22, 0.15);
-  --color-pokemon-bug-foreground: #4d7c0f;
-  --color-pokemon-bug-border: rgba(132, 204, 22, 0.4);
-  --color-pokemon-bug-indicator: #65a30d;
-  --color-pokemon-fighting-surface: rgba(220, 38, 38, 0.12);
-  --color-pokemon-fighting-foreground: #b91c1c;
-  --color-pokemon-fighting-border: rgba(220, 38, 38, 0.35);
-  --color-pokemon-fighting-indicator: #dc2626;
-  --color-pokemon-dark-surface: rgba(71, 85, 105, 0.15);
-  --color-pokemon-dark-foreground: #0f172a;
-  --color-pokemon-dark-border: rgba(71, 85, 105, 0.4);
-  --color-pokemon-dark-indicator: #334155;
-  --color-pokemon-normal-surface: rgba(156, 163, 175, 0.18);
-  --color-pokemon-normal-foreground: #374151;
-  --color-pokemon-normal-border: rgba(156, 163, 175, 0.4);
-  --color-pokemon-normal-indicator: #6b7280;
+  /* Shared motion: finite entries keep content readable throughout. */
+  --ease-portfolio: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-portfolio-enter: portfolio-enter 700ms var(--ease-portfolio) both;
+  --animate-portfolio-portrait: portfolio-enter 950ms var(--ease-portfolio) both;
+
+  @keyframes portfolio-enter {
+    from {
+      transform: translateY(12px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* Legacy aliases for template compatibility */
+  --color-device-shell: #0284c7;
+  --color-device-shell-dark: #0369a1;
+  --color-device-shell-border: #075985;
+  --color-inverse-foreground: #ffffff;
+  --color-device-lens: #0ea5e9;
+  --color-device-lens-light: #38bdf8;
+  --color-device-lens-dark: #0284c7;
+  --color-device-indicator: #10b981;
+  --color-device-control: #0f172a;
 }
