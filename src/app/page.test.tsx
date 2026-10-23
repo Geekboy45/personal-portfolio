@@ -12,12 +12,12 @@ it("renders Luis Elizondo professional portfolio with headline, metrics and proj
 
   // Check Main H1 Heading
   expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-    /Luis Ángel Elizondo Gallegos/i,
+    /Luis Angel Elizondo Gallegos/i,
   );
 
   // Check Profile Image
   const profileImage = screen.getByRole("img", {
-    name: /Luis Ángel Elizondo Gallegos/i,
+    name: /Luis Angel Elizondo Gallegos/i,
   });
   expect(profileImage).toBeInTheDocument();
 
@@ -48,6 +48,14 @@ it.each([
       </ToastProvider>,
     );
     expect(screen.getByRole("heading", { name: chapter })).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", {
+        name:
+          locale === "es"
+            ? "Hablemos de tu proyecto"
+            : "Let’s talk about your project",
+      }),
+    ).toHaveAttribute("href", "#contact");
     expect(screen.queryByText(placeholder)).not.toBeInTheDocument();
     expect(
       screen.getByRole("img", {
@@ -95,7 +103,10 @@ it.each([
     );
     expect(
       screen.getByRole("link", {
-        name: locale === "es" ? "Escríbeme" : "Email me",
+        name:
+          locale === "es"
+            ? "Iniciemos la conversación"
+            : "Start a conversation",
       }),
     ).toHaveAttribute("href", "mailto:luisangelelizondo4554@gmail.com");
     expect(container.querySelector('a[href*="github.com"]')).toBeNull();

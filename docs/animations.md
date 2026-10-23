@@ -287,3 +287,19 @@ This is a second documented `useGSAP` lifecycle exception: CSS transitions canno
 This is the user's actual portfolio, not a template demonstration. Per-section animation/debug controls were removed at the user's request. A single unobtrusive footer checkbox, “Reduce motion” / “Reducir movimiento”, is the accessibility mechanism for both scroll sequences. The explicit user preference persists under `portfolio-reduced-motion`; if browser storage rejects writes, the session preference still works. OS reduced motion always wins and cannot be overridden by this control. The server snapshot is static/reduced until hydration determines the preference. Subscriptions release media/storage/custom-event listeners on disposal.
 
 Checking the footer option reverts the career timeline and gallery tween/pin/overflow styles. The static illustration, all text and native horizontally scrollable photos remain. Unchecking it restores the effects only when the OS permits. The choice is not presented as a demo control. Hero entry movement and hover translation were removed so a persisted reduced-motion choice does not leave separate CSS movement running. Color/focus feedback remains native CSS. Meaningful regression tests cover shared teardown, preference replacement and storage rejection.
+
+## Career planes redesign (2026-10-23)
+
+The career illustration now uses three architectural SVG planes instead of connected nodes. The existing scoped GSAP lifecycle, native sticky layout, shared motion preference and mobile static fallback are preserved. Only transforms and opacity animate: the planes assemble progressively, chart bars grow and an arrow rises with reading progress. No dashed-path painting, timers, additional dependency or client boundary is introduced. All labels and narrative remain visible independently of animation. Skills remain server-rendered semantic lists, presented as an editorial six-domain catalog with existing semantic color tokens and no continuous motion.
+
+## Contact interaction (2026-10-23)
+
+The contact image uses a finite 900ms native CSS zoom and decorative light sweep on panel hover or focus-within. The existing contact client boundary reads the shared reduced-motion signal; when reduced (including the server snapshot), it renders neither transform triggers nor transitions. CSS also gates motion on OS preference. The image stays visible without JavaScript, overlays ignore pointer events, and no timer, effect, observer, scroll handler, dependency or autoplay loop is added. The shared duration is owned by tokens.css. Existing text and actions do not move. Touch users retain normal contact actions; no gesture is intercepted.
+
+## Contact banner replacement (2026-10-23)
+
+Supersedes the image-zoom contact design: the owner rejected the architectural photo. The contact now uses a cobalt typographic invitation with a separate ink action strip and a decorative SVG arrow inside two rings. Native finite hover/focus transitions move the arrow and expand the outer ring. The same shared preference and OS gates disable all motion; no effect, dependency, timer or scroll lifecycle is introduced. The photograph and light sweep are no longer rendered. All actions remain real links/buttons and mobile uses the text/actions without the decorative mark.
+
+## Hero CTA motion (2026-10-23)
+
+A 300ms native transform transition advances the decorative CTA arrow by 4px on hover or visible keyboard focus. The label, button geometry and layout remain stationary. No looping, pulsing, entrance animation or delayed navigation. A focused `hero-contact-arrow.client.tsx` island subscribes to the existing shared reduced-motion signal; both that preference and OS CSS gates disable movement. The hero and link remain server-owned and usable without JavaScript. No effect, timer, new dependency or animation lifecycle is introduced; shared duration/easing stay token-owned.

@@ -1,93 +1,88 @@
 import { skillDomains, corePhilosophy } from "@/data/skills";
 
-interface SkillsSectionProps {
-  locale?: "es" | "en";
-}
+const domainSymbols = ["</>", "☁", "{ }", "✳", "↗", "◎"];
 
-export function SkillsSection({ locale = "en" }: SkillsSectionProps) {
+export function SkillsSection({ locale = "en" }: { locale?: "es" | "en" }) {
   const isEs = locale === "es";
-
   return (
     <section
       id="skills"
-      className="scroll-mt-24 border-b border-border/80 py-16 sm:py-24"
+      className="scroll-mt-24 border-b border-border py-16 sm:py-24"
       aria-labelledby="skills-heading"
     >
-      {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border/80 pb-6">
-        <div className="max-w-2xl">
-          <div className="inline-flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-widest text-primary">
-            <span>04 / {isEs ? "Capacidades" : "Capabilities"}</span>
-            <span>{"//"}</span>
-            <span className="text-primary font-semibold">
-              {isEs ? "Áreas técnicas" : "Core domains"}
-            </span>
-          </div>
+      <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-20">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-widest text-primary">
+            04 / {isEs ? "Capacidades" : "Capabilities"}
+          </p>
           <h2
             id="skills-heading"
-            className="mt-4 font-display text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+            className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl"
           >
-            {isEs
-              ? "Dominios Técnicos & Ecosistema"
-              : "Technical Domains & Cloud Stack"}
+            {isEs ? "Las herramientas cambian." : "Tools evolve."}
+            <br />
+            <span className="text-primary">
+              {isEs ? "El criterio conecta." : "Perspective connects."}
+            </span>
           </h2>
-          <p className="mt-3 text-base text-muted-foreground leading-relaxed">
-            {isEs
-              ? "Herramientas y tecnologías en producción: arquitectura cloud, servicios de backend y pipelines de inteligencia artificial."
-              : "Production-grade tools: cloud architecture, distributed backends, and operational machine learning."}
-          </p>
         </div>
-      </div>
-
-      {/* Direct Convergence Philosophy */}
-      <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-6 sm:p-7 shadow-xs">
-        <span className="font-mono text-xs font-bold uppercase tracking-wider text-primary block mb-2">
-          {isEs ? "ENFOQUE DE ARQUITECTURA" : "ENGINEERING APPROACH"}
-        </span>
-        <p className="text-base sm:text-lg font-semibold text-foreground leading-relaxed">
-          &ldquo;{corePhilosophy[locale]}&rdquo;
+        <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">
+          {corePhilosophy[locale]}
         </p>
       </div>
-
-      {/* Clean 3-Column Domains Grid */}
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid gap-px overflow-hidden rounded-panel border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
         {skillDomains.map((domain, index) => (
           <article
             key={domain.id}
-            className="group flex flex-col justify-between rounded-2xl border border-border bg-surface-raised p-6 shadow-sm transition-all duration-300 hover:border-primary/50 hover:shadow-panel"
+            className={`group relative flex flex-col p-6 sm:p-8 ${index === 0 ? "bg-foreground text-inverse-foreground" : "bg-surface-raised text-foreground"}`}
           >
-            <div>
-              <div className="flex items-center justify-between border-b border-border/70 pb-3">
-                <span className="font-mono text-xs font-bold text-primary">
-                  0{index + 1}
-                </span>
-                <span className="font-mono text-[10px] uppercase font-semibold text-muted-foreground">
-                  {isEs ? "ÁREA" : "DOMAIN"}
-                </span>
-              </div>
-
-              <h3 className="mt-3 font-display text-lg font-bold text-foreground">
-                {domain.name[locale]}
-              </h3>
-
-              <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed font-normal">
-                {domain.description[locale]}
-              </p>
+            <div className="flex items-start justify-between gap-4">
+              <span
+                aria-hidden="true"
+                className={`font-mono text-5xl leading-none ${index === 0 ? "text-inverse-accent" : "text-primary"}`}
+              >
+                {domainSymbols[index]}
+              </span>
+              <span
+                className={`font-mono text-xs ${index === 0 ? "text-inverse-accent" : "text-muted-foreground"}`}
+              >
+                / 0{index + 1}
+              </span>
             </div>
-
-            <div className="mt-5 flex flex-wrap gap-1.5 pt-3 border-t border-border/50">
-              {domain.skills[locale].map((skill) => (
-                <span
+            <h3 className="mt-8 max-w-xs font-display text-2xl font-semibold leading-tight tracking-tight">
+              {domain.name[locale]}
+            </h3>
+            <p
+              className={`mt-4 text-sm leading-relaxed ${index === 0 ? "text-inverse-foreground/80" : "text-muted-foreground"}`}
+            >
+              {domain.description[locale]}
+            </p>
+            <ul
+              className={`mt-8 flex flex-wrap gap-x-4 gap-y-3 border-t pt-5 text-sm ${index === 0 ? "border-inverse-foreground/20" : "border-border"}`}
+            >
+              {domain.skills[locale].map((skill, skillIndex) => (
+                <li
                   key={skill}
-                  className="rounded-md bg-surface px-2 py-0.5 font-mono text-[11px] font-medium text-foreground border border-border/70 shadow-2xs"
+                  className={
+                    skillIndex < 3
+                      ? "font-semibold"
+                      : index === 0
+                        ? "text-inverse-foreground/80"
+                        : "text-muted-foreground"
+                  }
                 >
                   {skill}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </article>
         ))}
       </div>
+      <p className="mt-5 text-right font-mono text-xs text-muted-foreground">
+        {isEs
+          ? "De la idea a producción. De los datos al impacto."
+          : "From idea to production. From data to impact."}
+      </p>
     </section>
   );
 }

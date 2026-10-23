@@ -33,13 +33,13 @@ export function getSiteMetadata(locale: Locale): Metadata {
     },
     alternates: siteConfig.canonicalOrigin
       ? {
-          canonical: sitePath(isEs ? "/es/" : "/"),
-          languages: {
-            en: sitePath("/"),
-            es: sitePath("/es/"),
-            "x-default": sitePath("/"),
-          },
-        }
+        canonical: sitePath(isEs ? "/es/" : "/"),
+        languages: {
+          en: sitePath("/"),
+          es: sitePath("/es/"),
+          "x-default": sitePath("/"),
+        },
+      }
       : undefined,
     robots: {
       index: siteConfig.isIndexable,
@@ -83,7 +83,7 @@ export function SiteShell({
               <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-muted-foreground">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="font-semibold text-foreground">
-                    Luis Ángel Elizondo Gallegos
+                    Luis Angel Elizondo Gallegos
                   </span>
                   <span>·</span>
                   <span>

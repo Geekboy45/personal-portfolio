@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import { sitePath } from "@/lib/site-path";
+import { useReducedMotion } from "@/lib/reduced-motion.client";
+
 import { profileData } from "@/data/profile";
 import { useToast } from "@/components/ui/toast.client";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { LinkButton } from "@/components/ui/link-button";
 
 export function ContactSection({ locale = "en" }: { locale?: "en" | "es" }) {
   const isEs = locale === "es";
+  const reducedMotion = useReducedMotion();
   const { showToast } = useToast();
   async function copyEmail() {
     try {
@@ -32,64 +33,87 @@ export function ContactSection({ locale = "en" }: { locale?: "en" | "es" }) {
       aria-labelledby="contact-heading"
       className="scroll-mt-24 py-16 sm:py-24"
     >
-      <div className="grid overflow-hidden rounded-panel bg-foreground text-inverse-foreground lg:grid-cols-[1.2fr_1fr]">
-        <div className="p-7 sm:p-12 xl:p-14">
-          <p className="font-mono text-xs uppercase tracking-widest text-inverse-accent">
-            06 / {isEs ? "La siguiente conversación" : "The next conversation"}
-          </p>
-          <h2
-            id="contact-heading"
-            className="mt-6 max-w-3xl font-display text-4xl font-semibold tracking-tight sm:text-5xl xl:text-6xl"
-          >
-            {isEs ? "Construyamos lo que sigue." : "Let’s build what’s next."}
-          </h2>
-          <p className="mt-5 max-w-xl leading-relaxed text-inverse-foreground/80">
-            {isEs
-              ? "Hablemos de ingeniería, arquitectura cloud y de cómo ayudar a un equipo a llegar más lejos."
-              : "Let’s talk about engineering, cloud architecture, and helping a team go further."}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+      <div className="group/contact isolate overflow-hidden rounded-panel bg-primary text-primary-foreground">
+        <div className="relative px-7 pt-8 pb-10 sm:px-12 sm:pt-12 sm:pb-14 lg:px-14">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-primary-foreground/25 pb-6 font-mono text-xs uppercase tracking-widest">
+            <p>
+              06 /{" "}
+              {isEs ? "La siguiente conversación" : "The next conversation"}
+            </p>
+            <span className="text-primary-foreground/80">Monterrey, MX</span>
+          </div>
+          <div className="mt-10 grid items-center gap-8 md:grid-cols-[1fr_auto]">
+            <div>
+              <h2
+                id="contact-heading"
+                className="max-w-3xl font-display text-4xl font-semibold leading-none tracking-tight sm:text-6xl md:text-5xl lg:text-7xl xl:text-8xl"
+              >
+                {isEs ? "Una buena idea." : "A good idea."}
+                <br />
+                <span className="text-inverse-accent">
+                  {isEs ? "Una conversación." : "One conversation."}
+                </span>
+              </h2>
+              <p className="mt-7 max-w-lg text-base leading-relaxed text-primary-foreground/90 sm:text-lg">
+                {isEs
+                  ? "¿Qué te gustaría construir? Hablemos de tecnología, equipos y de lo que viene después."
+                  : "What would you like to build? Let’s talk about technology, teams, and what comes next."}
+              </p>
+            </div>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none relative hidden size-40 items-center justify-center md:flex lg:size-52"
+            >
+              <div
+                className={`absolute inset-0 rounded-full border border-primary-foreground/35 ${reducedMotion ? "" : "motion-safe:transition-transform motion-safe:duration-(--motion-contact-duration) motion-safe:ease-(--ease-portfolio) motion-safe:group-hover/contact:scale-110 motion-safe:group-focus-within/contact:scale-110"}`}
+              />
+              <div className="absolute inset-4 rounded-full border border-primary-foreground/20" />
+              <svg
+                viewBox="0 0 100 100"
+                fill="none"
+                className={`size-24 lg:size-32 ${reducedMotion ? "" : "motion-safe:transition-transform motion-safe:duration-(--motion-contact-duration) motion-safe:ease-(--ease-portfolio) motion-safe:group-hover/contact:translate-x-2 motion-safe:group-hover/contact:-translate-y-2 motion-safe:group-focus-within/contact:translate-x-2 motion-safe:group-focus-within/contact:-translate-y-2"}`}
+              >
+                <path
+                  d="M22 78 78 22M23 22h55v55"
+                  stroke="currentColor"
+                  strokeWidth="7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-7 bg-foreground px-7 py-7 text-inverse-foreground sm:px-12 lg:flex-row lg:items-center lg:justify-between lg:px-14">
+          <div className="flex flex-wrap items-center gap-3">
             <LinkButton
               variant="secondary"
               href={`mailto:${profileData.email}`}
             >
-              {isEs ? "Escríbeme" : "Email me"}
+              {isEs ? "Iniciemos la conversación" : "Start a conversation"}
               <span aria-hidden="true">↗</span>
             </LinkButton>
             <Button variant="secondary" onClick={copyEmail}>
               {isEs ? "Copiar correo" : "Copy email"}
             </Button>
           </div>
-          <p className="mt-5 break-all font-mono text-xs text-inverse-foreground/70">
-            {profileData.email}
-          </p>
-          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-4 border-t border-inverse-foreground/20 pt-6 text-sm">
+          <div className="flex flex-col gap-3 lg:items-end">
+            <p className="break-all font-mono text-xs text-inverse-foreground/80">
+              {profileData.email}
+            </p>
             {profileData.socials.map((link) => (
               <a
                 key={link.icon}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-8 items-center gap-2 underline-offset-4 hover:underline"
+                className="inline-flex min-h-8 items-center gap-2 text-sm underline-offset-4 hover:underline"
               >
                 {link.label}
                 <span aria-hidden="true">↗</span>
               </a>
             ))}
           </div>
-        </div>
-        <div className="relative min-h-64 border-t-4 border-primary sm:min-h-80 lg:min-h-full lg:border-l-4 lg:border-t-0">
-          <Image
-            src={sitePath("/images/profile/contact-connections.webp")}
-            alt=""
-            fill
-            sizes="(min-width: 1280px) 550px, (min-width: 1024px) 45vw, 100vw"
-            className="object-cover object-center"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-linear-to-t from-foreground/40 to-transparent"
-          />
         </div>
       </div>
     </section>

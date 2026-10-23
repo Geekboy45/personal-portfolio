@@ -44,7 +44,7 @@ export function VisualBanner({ locale = "en" }: VisualBannerProps) {
             </blockquote>
 
             <p className="mt-3 text-xs sm:text-sm text-inverse-foreground/70 font-mono">
-              Luis Ángel Elizondo Gallegos ·{" "}
+              Luis Angel Elizondo Gallegos ·{" "}
               {isEs
                 ? "Liderazgo técnico e ingeniería de software"
                 : "Tech Lead & Software Engineer"}

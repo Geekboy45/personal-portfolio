@@ -31,7 +31,7 @@ export interface ProfileData {
 }
 
 export const profileData: ProfileData = {
-  name: "Luis Ángel Elizondo Gallegos",
+  name: "Luis Angel Elizondo Gallegos",
   shortName: "Luis Elizondo",
   headline: {
     es: "Tech Lead & Software Engineer con enfoque en arquitecturas cloud escalables, automatización de procesos críticos y productos basados en datos.",

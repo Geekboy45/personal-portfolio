@@ -54,6 +54,8 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   /* Shared motion: finite entries keep content readable throughout. */
+  --motion-contact-duration: 900ms;
+  --motion-action-duration: 300ms;
   --ease-portfolio: cubic-bezier(0.22, 1, 0.36, 1);
   --animate-portfolio-enter: portfolio-enter 700ms var(--ease-portfolio) both;
   --animate-portfolio-portrait: portfolio-enter 950ms var(--ease-portfolio) both;

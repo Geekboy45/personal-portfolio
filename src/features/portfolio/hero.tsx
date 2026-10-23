@@ -2,7 +2,7 @@ import Image from "next/image";
 import { sitePath } from "@/lib/site-path";
 import { profileData } from "@/data/profile";
 import { LinkButton } from "@/components/ui/link-button";
-import { ArrowRightIcon } from "@/components/ui/icons";
+import { HeroContactArrow } from "./hero-contact-arrow.client";
 
 interface HeroProps {
   locale?: "es" | "en";
@@ -36,7 +36,7 @@ export function Hero({ locale = "en" }: HeroProps) {
             id="hero-heading"
             className="mt-3 font-display text-5xl font-semibold leading-[1.06] tracking-tight text-foreground sm:text-7xl lg:text-6xl xl:text-7xl"
           >
-            <span className="block">Luis Ángel</span>{" "}
+            <span className="block">Luis Angel</span>{" "}
             <span className="block text-primary">
               Elizondo Gallegos<span className="text-foreground">.</span>
             </span>
@@ -51,15 +51,25 @@ export function Hero({ locale = "en" }: HeroProps) {
               ? "Liderazgo técnico, arquitectura cloud e IA aplicada. Transformo desafíos operativos en software que libera capacidad y escala con el negocio."
               : "Technical leadership, cloud architecture, and applied AI. I turn operational challenges into software that unlocks capacity and scales with the business."}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <LinkButton href="#projects" variant="ink">
+          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-6">
+            <LinkButton
+              href="#contact"
+              variant="primary"
+              size="lg"
+              className="group/hero-cta"
+            >
+              {isEs
+                ? "Hablemos de tu proyecto"
+                : "Let’s talk about your project"}
+              <HeroContactArrow />
+            </LinkButton>
+            <a
+              href="#projects"
+              className="inline-flex min-h-11 items-center justify-center gap-2 text-sm font-semibold text-muted-foreground underline-offset-4 hover:text-primary hover:underline sm:justify-start"
+            >
               {isEs ? "Ver proyectos" : "Explore selected work"}
-              <ArrowRightIcon size={16} />
-            </LinkButton>
-            <LinkButton href="#contact" variant="secondary">
-              {isEs ? "Hablemos" : "Let’s talk"}
               <span aria-hidden="true">↗</span>
-            </LinkButton>
+            </a>
           </div>
           <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-border pt-5 font-mono text-xs text-muted-foreground">
             <span>.NET / C#</span>
@@ -78,8 +88,8 @@ export function Hero({ locale = "en" }: HeroProps) {
               src={sitePath("/images/profile/luis-avatar.jpeg")}
               alt={
                 isEs
-                  ? "Luis Ángel Elizondo Gallegos en su graduación"
-                  : "Luis Ángel Elizondo Gallegos at his graduation"
+                  ? "Luis Angel Elizondo Gallegos en su graduación"
+                  : "Luis Angel Elizondo Gallegos at his graduation"
               }
               fill
               preload

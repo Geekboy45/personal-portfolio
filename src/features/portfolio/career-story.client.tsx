@@ -20,11 +20,10 @@ export function CareerStoryMotion({
   const active = !reducedMotion;
   const isEs = locale === "es";
 
-  // Authorized animation lifecycle exception (docs/animations.md): one scoped,
-  // scroll-scrubbed SVG sequence. CSS transitions do not coordinate its stages
-  // with reading progress; native scroll timelines lack an agreed browser matrix.
-  // useGSAP + matchMedia own teardown, including preference/toggle replacement,
-  // Strict Mode and unmount. Narrative children always retain server-rendered text.
+  // Authorized lifecycle exception (docs/animations.md): synchronize decorative
+  // planes with reading progress. CSS transitions cannot coordinate the stages;
+  // native scroll timelines have no agreed browser matrix. Scoped useGSAP and
+  // matchMedia revert on preference changes, Strict Mode cleanup and unmount.
   useGSAP(
     () => {
       if (!active) return;
@@ -33,45 +32,34 @@ export function CareerStoryMotion({
         "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
         () => {
           gsap.registerPlugin(ScrollTrigger);
-          const timeline = gsap.timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: {
-              trigger: scope.current,
-              start: "top 45%",
-              end: "bottom 75%",
-              scrub: 0.35,
-              invalidateOnRefresh: true,
-            },
-          });
-          timeline
+          gsap
+            .timeline({
+              defaults: { ease: "none" },
+              scrollTrigger: {
+                trigger: scope.current,
+                start: "top 45%",
+                end: "bottom 75%",
+                scrub: 0.35,
+                invalidateOnRefresh: true,
+              },
+            })
             .fromTo(
-              "[data-story-node]",
-              { scale: 0.55, opacity: 0.35, transformOrigin: "50% 50%" },
-              { scale: 1, opacity: 1, stagger: 0.12, duration: 0.8 },
+              "[data-story-plane]",
+              { y: 48, x: -24, opacity: 0.55 },
+              { y: 0, x: 0, opacity: 1, stagger: 0.45, duration: 1.1 },
               0,
             )
             .fromTo(
-              "[data-story-connection]",
-              { attr: { "stroke-dashoffset": 700 }, opacity: 0.3 },
-              {
-                attr: { "stroke-dashoffset": 0 },
-                opacity: 1,
-                stagger: 0.1,
-                duration: 1,
-              },
-              0.6,
+              "[data-story-rise]",
+              { scaleY: 0.3, transformOrigin: "50% 100%" },
+              { scaleY: 1, stagger: 0.1, duration: 1.2 },
+              0.3,
             )
             .fromTo(
-              "[data-story-core]",
-              { scale: 0.8, transformOrigin: "50% 50%" },
-              { scale: 1, duration: 0.9 },
+              "[data-story-arrow]",
+              { x: -28, y: 28 },
+              { x: 0, y: 0, duration: 1 },
               1.3,
-            )
-            .fromTo(
-              "[data-story-orbit]",
-              { rotation: -35, transformOrigin: "50% 50%" },
-              { rotation: 0, duration: 1.2 },
-              1,
             );
         },
       );
@@ -86,106 +74,93 @@ export function CareerStoryMotion({
       className="mt-10 grid items-start gap-10 md:grid-cols-2 lg:gap-20"
     >
       <div className="md:sticky md:top-24">
-        <div className="overflow-hidden rounded-panel border border-border bg-primary-subtle p-5 sm:p-8">
-          <div className="flex items-center justify-between gap-4">
-            <span className="font-mono text-xs uppercase tracking-widest text-primary">
-              {isEs ? "Conectar las piezas" : "Connecting the dots"}
+        <div className="relative isolate overflow-hidden rounded-panel bg-foreground px-6 pt-7 pb-6 text-inverse-foreground sm:px-8 sm:pt-8">
+          <div className="flex justify-between gap-4 font-mono text-xs uppercase tracking-widest text-inverse-accent">
+            <span>
+              {isEs ? "Una perspectiva más amplia" : "A broader perspective"}
             </span>
-            <span
-              className="font-mono text-xs text-muted-foreground"
-              aria-hidden="true"
-            >
-              01 → 03
-            </span>
+            <span aria-hidden="true">↗</span>
           </div>
+          <p className="relative z-10 mt-6 max-w-xs font-display text-4xl font-semibold leading-none tracking-tight sm:text-5xl">
+            {isEs ? "Cada etapa suma." : "Every layer counts."}
+          </p>
           <svg
             aria-hidden="true"
-            viewBox="0 0 440 360"
+            viewBox="0 0 480 370"
             fill="none"
-            className="mx-auto my-4 w-full max-w-md text-primary"
+            className="-mx-2 mt-2 max-h-72 w-full overflow-visible md:max-h-[36svh]"
           >
-            <g data-story-orbit>
-              <circle
-                cx="220"
-                cy="180"
-                r="145"
-                stroke="currentColor"
-                strokeOpacity=".16"
-                strokeDasharray="3 10"
-              />
+            <g stroke="var(--color-inverse-accent)" strokeOpacity=".13">
+              <path d="M0 260 240 130 480 260M0 310 240 180 480 310M60 370 300 240M180 370 420 240" />
             </g>
-            <g stroke="currentColor" strokeWidth="1.5">
+            <g data-story-plane>
               <path
-                data-story-connection
-                d="M80 100 Q180 80 220 180"
-                strokeDasharray="700"
+                d="m40 238 200-105 200 105-200 108Z"
+                fill="var(--color-primary)"
               />
               <path
-                data-story-connection
-                d="M360 100 Q260 80 220 180"
-                strokeDasharray="700"
+                d="m40 238 200 108 200-108v12L240 358 40 250Z"
+                fill="var(--color-primary-hover)"
               />
-              <path
-                data-story-connection
-                d="M80 260 Q180 280 220 180"
-                strokeDasharray="700"
-              />
-              <path
-                data-story-connection
-                d="M360 260 Q260 280 220 180"
-                strokeDasharray="700"
-              />
-            </g>
-            {[
-              [80, 100],
-              [360, 100],
-              [80, 260],
-              [360, 260],
-            ].map(([x, y], index) => (
-              <g key={index} transform={`translate(${x} ${y})`}>
-                <g data-story-node>
-                  <rect
-                    x="-25"
-                    y="-25"
-                    width="50"
-                    height="50"
-                    rx="13"
-                    fill="var(--color-surface-raised)"
-                    stroke="currentColor"
-                    strokeOpacity=".3"
-                  />
-                  <circle r="5" fill="currentColor" />
-                  <path
-                    d="M-10 12H10"
-                    stroke="currentColor"
-                    strokeOpacity=".4"
-                  />
-                </g>
+              <g stroke="var(--color-inverse-accent)" strokeWidth="2">
+                <path d="m105 236 135 72 134-72M140 216l100 54 99-54M175 197l65 35 64-35" />
               </g>
-            ))}
-            <g data-story-core>
-              <rect
-                x="164"
-                y="124"
-                width="112"
-                height="112"
-                rx="28"
-                fill="currentColor"
+            </g>
+            <g data-story-plane>
+              <path
+                d="m60 166 180-95 180 95-180 97Z"
+                fill="var(--color-inverse-accent)"
               />
               <path
-                d="m197 180 16 16 30-32"
-                stroke="var(--color-primary-foreground)"
-                strokeWidth="5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="m60 166 180 97 180-97v10l-180 97-180-97Z"
+                fill="var(--color-primary)"
               />
+              <g
+                stroke="var(--color-primary)"
+                strokeWidth="3"
+                strokeLinecap="round"
+              >
+                <path d="m139 159-24 13 24 13m202-26 24 13-24 13m-88-48-26 63" />
+              </g>
             </g>
+            <g data-story-plane>
+              <path
+                d="m100 96 140-74 140 74-140 76Z"
+                fill="var(--color-surface-raised)"
+              />
+              <path
+                d="m100 96 140 76 140-76v9l-140 76-140-76Z"
+                fill="var(--color-inverse-accent)"
+              />
+              <g fill="var(--color-primary)">
+                <path data-story-rise d="m178 103 22 12V89l-22-12Z" />
+                <path data-story-rise d="m211 120 22 12V80l-22-12Z" />
+                <path data-story-rise d="m244 133 22-12V55l-22 12Z" />
+                <path data-story-rise d="m277 115 22-12V35l-22 12Z" />
+              </g>
+            </g>
+            <path
+              data-story-arrow
+              d="M374 109V40m0 0h-46m46 0-60 60"
+              stroke="var(--color-inverse-accent)"
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
-          <p className="text-center font-mono text-xs text-muted-foreground">
-            {isEs
-              ? "Datos → Producto → Liderazgo"
-              : "Data → Product → Leadership"}
-          </p>
+          <div className="relative grid grid-cols-3 gap-3 border-t border-inverse-foreground/20 pt-5">
+            {(isEs
+              ? ["Datos", "Producto", "Liderazgo"]
+              : ["Data", "Product", "Leadership"]
+            ).map((label, index) => (
+              <div key={label}>
+                <span className="font-mono text-xs text-inverse-accent">
+                  0{index + 1}
+                </span>
+                <p className="mt-1 text-sm font-medium">{label}</p>
+              </div>
+            ))}
+          </div>
         </div>
         <p className="mt-4 text-xs text-muted-foreground">
           {isEs
