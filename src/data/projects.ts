@@ -15,8 +15,17 @@ export const projectsData: ProjectOverview[] = [
       es: "Gestor | Validador Documental",
     },
     summary: {
-      en: "Document management and validation: ~80% automation and ~70% less manual review work.",
-      es: "Gestión y validación documental: ~80% de automatización y ~70% menos carga de revisión manual.",
+      en: "Centralized document management and validation, reducing manual document-review workload by ~70%.",
+      es: "Gestión y validación documental centralizada, con ~70% menos carga de revisión manual.",
+    },
+  },
+  {
+    id: "aeris",
+    company: "Crediclub",
+    title: { en: "Aeris", es: "Aeris" },
+    summary: {
+      en: "Loan renewal platform that doubled operational productivity and reached 100% renewal coverage without increasing headcount.",
+      es: "Plataforma de renovación de crédito que duplicó la productividad y alcanzó 100% de cobertura sin aumentar el equipo.",
     },
   },
   {
@@ -27,17 +36,8 @@ export const projectsData: ProjectOverview[] = [
       es: "GILSA",
     },
     summary: {
-      en: "Data and analytics for GILSA, turning information into useful insights for business decisions.",
-      es: "Datos y analítica para GILSA, transformando información en hallazgos útiles para decisiones de negocio.",
-    },
-  },
-  {
-    id: "aeris",
-    company: "Crediclub",
-    title: { en: "Aeris", es: "Aeris" },
-    summary: {
-      en: "Loan renewal platform achieving 100% renewals coverage and simpler operations for the team.",
-      es: "Plataforma de renovación de crédito con 100% de cobertura y una operación más simple para el equipo.",
+      en: "Customer segmentation and executive analytics to support inventory-allocation decisions at GILSA.",
+      es: "Segmentación de clientes y analítica ejecutiva para apoyar decisiones de distribución de inventario en GILSA.",
     },
   },
 ];

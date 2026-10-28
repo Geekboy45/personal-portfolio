@@ -15,17 +15,34 @@ export interface AwardItem {
 
 export const awardsData: AwardItem[] = [
   {
+    id: "graduation-excellence-itesm",
+    title: {
+      es: "Mención Honorífica de Excelencia en la Graduación",
+      en: "Graduation Honors for Academic Excellence",
+    },
+    institution: "Tecnológico de Monterrey",
+    date: { en: "June 2025", es: "Junio 2025" },
+    badge: "99.43 / 100",
+    context: {
+      es: "Reconocimiento por obtener uno de los promedios más altos de la Licenciatura en Inteligencia de Negocios.",
+      en: "Recognized for achieving one of the highest GPAs in the B.S. in Business Intelligence program.",
+    },
+  },
+  {
     id: "excelencia-academica-itesm",
     title: {
       es: "Reconocimiento a la Excelencia Académica",
       en: "Academic Excellence Distinction",
     },
     institution: "Tecnológico de Monterrey",
-    date: { en: "December 2022", es: "Diciembre 2022" },
+    date: {
+      en: "December 2022 · June 2025",
+      es: "Diciembre 2022 · Junio 2025",
+    },
     badge: "Top 1%",
     context: {
-      es: "Otorgado al Top 1% de estudiantes con trayectoria académica sobresaliente dentro de la Escuela de Negocios del Campus Monterrey.",
-      en: "Awarded exclusively to the Top 1% of students demonstrating outstanding academic performance across the Monterrey Campus Business School.",
+      es: "Recibido en dos ocasiones por formar parte del Top 1% de estudiantes de la Escuela de Negocios del Campus Monterrey.",
+      en: "Received twice for ranking among the Top 1% of students in the Monterrey Campus Business School.",
     },
   },
   {

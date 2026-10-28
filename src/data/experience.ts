@@ -17,7 +17,7 @@ export const careerChapters = [
   },
   {
     id: "product",
-    year: "2024 — 2025",
+    year: "2024 — 2026",
     title: {
       en: "Then, build something useful.",
       es: "Después, construir algo útil.",
@@ -45,6 +45,45 @@ export const careerChapters = [
     tag: {
       en: "Technical leadership & cloud architecture",
       es: "Liderazgo técnico y arquitectura cloud",
+    },
+  },
+];
+// CV chronology; the two product roles are grouped to preserve the stated tenure.
+export const employmentHistory = [
+  {
+    id: "crediclub-tech-lead",
+    company: "Crediclub",
+    role: { en: "Tech Lead", es: "Tech Lead" },
+    period: { en: "Mar 2026 — Present", es: "Mar 2026 — Actualidad" },
+    summary: {
+      en: "Leading engineering delivery, cloud architecture and AI automation for financial operations.",
+      es: "Liderazgo de ingeniería, arquitectura cloud y automatización con IA para operaciones financieras.",
+    },
+  },
+  {
+    id: "crediclub-product",
+    company: "Crediclub",
+    role: {
+      en: "Product Trainee → Product Analyst",
+      es: "Product Trainee → Product Analyst",
+    },
+    period: { en: "Feb 2025 — Mar 2026", es: "Feb 2025 — Mar 2026" },
+    summary: {
+      en: "Built communications, customer segmentation and recruiting tools that connect product decisions with daily operations.",
+      es: "Desarrollo de herramientas de comunicación, segmentación de clientes y reclutamiento para conectar producto y operación.",
+    },
+  },
+  {
+    id: "datomicos-ai",
+    company: "Datómicos",
+    role: {
+      en: "AI Solutions Development",
+      es: "Desarrollo de soluciones de IA",
+    },
+    period: { en: "Feb 2024 — Feb 2025", es: "Feb 2024 — Feb 2025" },
+    summary: {
+      en: "Developed AI, analytics and software solutions for clients including GILSA, Crediclub and Grupo Treviño.",
+      es: "Desarrollo de soluciones de IA, analítica y software para clientes como GILSA, Crediclub y Grupo Treviño.",
     },
   },
 ];

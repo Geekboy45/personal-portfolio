@@ -1,4 +1,5 @@
 import { CareerStoryMotion } from "./career-story.client";
+import { EmploymentSection } from "./employment-section";
 
 import { careerChapters } from "@/data/experience";
 
@@ -42,6 +43,7 @@ export function CareerStory({ locale = "en" }: { locale?: "en" | "es" }) {
           </article>
         ))}
       </CareerStoryMotion>
+      <EmploymentSection locale={locale} />
     </section>
   );
 }

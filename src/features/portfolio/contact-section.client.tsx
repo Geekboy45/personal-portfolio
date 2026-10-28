@@ -1,6 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "@/lib/reduced-motion.client";
+import { sitePath } from "@/lib/site-path";
 
 import { profileData } from "@/data/profile";
 import { useToast } from "@/components/ui/toast.client";
@@ -96,6 +97,16 @@ export function ContactSection({ locale = "en" }: { locale?: "en" | "es" }) {
             <Button variant="secondary" onClick={copyEmail}>
               {isEs ? "Copiar correo" : "Copy email"}
             </Button>
+            <LinkButton
+              variant="secondary"
+              href={sitePath("/files/luis-elizondo-cv.pdf")}
+              download="Luis-Elizondo-CV.pdf"
+            >
+              {isEs
+                ? "Descargar CV · PDF en inglés"
+                : "Download CV · PDF in English"}
+              <span aria-hidden="true">↓</span>
+            </LinkButton>
           </div>
           <div className="flex flex-col gap-3 lg:items-end">
             <p className="break-all font-mono text-xs text-inverse-foreground/80">

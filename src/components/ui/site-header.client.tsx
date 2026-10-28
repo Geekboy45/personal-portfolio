@@ -42,7 +42,7 @@ export function SiteHeader() {
             {t.nav.projects}
           </Link>
           <Link
-            href={`${locale === "es" ? "/es/" : "/"}#experience`}
+            href={`${locale === "es" ? "/es/" : "/"}#employment`}
             className="text-muted-foreground transition-colors hover:text-foreground hidden md:inline"
           >
             {t.nav.experience}
@@ -101,7 +101,7 @@ export function SiteHeader() {
               </Link>
               <Link
                 className="rounded-control p-3 hover:bg-surface-muted"
-                href={`${locale === "es" ? "/es/" : "/"}#experience`}
+                href={`${locale === "es" ? "/es/" : "/"}#employment`}
               >
                 {t.nav.experience}
               </Link>

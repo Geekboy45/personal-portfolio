@@ -11,6 +11,7 @@ const root = resolve("out");
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const indexable = process.env.ALLOW_INDEXING === "true";
 const mime = {
+  ".pdf": "application/pdf",
   ".html": "text/html",
   ".js": "text/javascript",
   ".css": "text/css",
@@ -82,6 +83,15 @@ try {
     await sleep(250);
   }
   assert(ready, "Production server did not become ready: " + output);
+  const cv = await fetch(base + "/files/luis-elizondo-cv.pdf");
+  assert.equal(cv.status, 200, "CV download must be available");
+  assert.match(cv.headers.get("Content-Type") ?? "", /application\/pdf/);
+  assert.equal(
+    Buffer.from(await cv.arrayBuffer())
+      .subarray(0, 5)
+      .toString(),
+    "%PDF-",
+  );
   for (const path of ["/", "/es/"]) {
     const response = await fetch(base + path);
     assert.equal(response.status, 200, path);

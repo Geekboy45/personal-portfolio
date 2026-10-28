@@ -74,3 +74,16 @@ The hero now prioritizes the bilingual contact anchor with the existing primary 
 ## Formal CTA interaction (2026-10-23)
 
 The hero CTA retains its primary color and label; only its decorative arrow advances 4px over 300ms on hover or visible keyboard focus. The small client arrow subscribes to the existing reduced-motion preference; the hero remains server-rendered. No continuous attention effect or new dependency. Formatting, lint, TypeScript and all 58 tests passed. Existing Webpack fallback is used for profile builds; no workflow/compiler setting was changed.
+
+## CV and employment (2026-10-27)
+
+Added a compact server-rendered employment section within the career section, with three bilingual entries sourced from the owner's CV. The product trainee/analyst roles share the stated Feb 2025–Mar 2026 tenure without inventing separate transition dates. Header Experience navigation targets employment. A native base-path-aware link downloads the original English PDF from public/files; SHA-256 matches the supplied file. Project summaries now distinguish document-review reduction (~70%) from signature approval automation (~80%); GILSA and Aeris descriptions remain concise.
+
+No dependency, effect, client boundary, animation, metadata or indexing policy change. Format/lint/typecheck and 58 tests passed. Both server and static builds passed with the existing local Webpack fallback; both smoke checks verify PDF status, MIME and signature. Windows sandbox restrictions required elevated build/server checks. Browser visual verification was blocked by the browser URL security policy; responsive visual and assistive-technology acceptance remain unverified. Dedicated SAST/secret scanning remains pending. No publication was performed.
+
+## Employment presentation and contact CV (2026-10-27)
+
+Employment now uses a connected card timeline with the current position highlighted in the existing ink/inverse palette. Finite native hover transitions move cards 4px and scale decorative markers; a focused client list consumes the shared preference while content remains server-owned. No new effects or dependencies; touch and reduced motion remain static. Contact includes the same base-path-aware original English PDF download. Skills descriptions and the architecture quote use shorter, concrete bilingual wording; the product narrative date now includes 2026 to match the CV tenure. Existing project disclosures and education content remain concise.
+
+Formatting, lint, TypeScript and 59 tests passed, including both download links and preference replacement. Visual browser/device checks remain unverified following the browser security-policy block recorded above; this is not full accessibility or performance acceptance. Indexing and deployment configuration are unchanged.
+Both server/static production builds and smoke checks passed using the established local Webpack fallback, including PDF delivery. No publication was performed.

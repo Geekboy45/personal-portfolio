@@ -303,3 +303,7 @@ Supersedes the image-zoom contact design: the owner rejected the architectural p
 ## Hero CTA motion (2026-10-23)
 
 A 300ms native transform transition advances the decorative CTA arrow by 4px on hover or visible keyboard focus. The label, button geometry and layout remain stationary. No looping, pulsing, entrance animation or delayed navigation. A focused `hero-contact-arrow.client.tsx` island subscribes to the existing shared reduced-motion signal; both that preference and OS CSS gates disable movement. The hero and link remain server-owned and usable without JavaScript. No effect, timer, new dependency or animation lifecycle is introduced; shared duration/easing stay token-owned.
+
+## Employment timeline (2026-10-27)
+
+Employment uses a native, finite 300ms CSS hover transition: cards translate 4px and decorative timeline markers scale to 1.15. There is no scroll listener, entrance gate, autoplay or effect. A focused EmploymentList client boundary consumes the shared reduced-motion preference; the server snapshot disables motion and OS media rules also gate it. Server-rendered children remain readable without JavaScript. Touch remains static; noninteractive cards do not add keyboard tab stops. Existing tokens own duration and easing.

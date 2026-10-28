@@ -39,8 +39,8 @@ export function VisualBanner({ locale = "en" }: VisualBannerProps) {
 
             <blockquote className="mt-4 font-display text-base leading-relaxed font-extrabold text-inverse-foreground sm:text-2xl sm:leading-snug lg:text-3xl">
               {isEs
-                ? "“La ingeniería de software de alto impacto no consiste en complejizar, sino en transformar cuellos de botella operativos en infraestructura invisible y escalable.”"
-                : "“High-impact software engineering isn’t about unnecessary complexity — it’s about transforming operational bottlenecks into invisible, scalable infrastructure.”"}
+                ? "“Diseño software para simplificar operaciones, liberar tiempo y ayudar a los equipos a crecer.”"
+                : "“I design software to simplify operations, free up time and help teams grow.”"}
             </blockquote>
 
             <p className="mt-3 text-xs sm:text-sm text-inverse-foreground/70 font-mono">

@@ -19,8 +19,8 @@ export const skillDomains: SkillDomain[] = [
       en: "Software Engineering & Architecture",
     },
     description: {
-      es: "Construcción de sistemas backend modulares, APIs de baja latencia y aplicaciones web con foco en confiabilidad y tipado estricto.",
-      en: "Designing modular backend systems, low-latency APIs, and web applications centered on strict typing and resilience.",
+      es: "Sistemas backend, APIs y aplicaciones web diseñados para simplificar operaciones y facilitar su mantenimiento.",
+      en: "Backend systems, APIs and web applications designed to simplify operations and remain maintainable.",
     },
     skills: {
       en: [
@@ -56,8 +56,8 @@ export const skillDomains: SkillDomain[] = [
       en: "Cloud & DevOps",
     },
     description: {
-      es: "Infraestructura contenerizada, automatización de despliegues continuos y gobernanza de secretos en nube pública.",
-      en: "Containerized workloads, automated deployment pipelines, and secret isolation on public cloud infrastructure.",
+      es: "Servicios en Azure, cargas en Kubernetes y despliegues automatizados con gestión segura de secretos.",
+      en: "Azure services, Kubernetes workloads and automated deployments with secure secrets management.",
     },
     skills: {
       en: [
@@ -91,8 +91,8 @@ export const skillDomains: SkillDomain[] = [
       en: "Data Platforms & SQL",
     },
     description: {
-      es: "Modelado relacional robusto, orquestación de flujos ETL y procesamiento analítico de altos volúmenes transaccionales.",
-      en: "Relational modeling, robust ETL workflows, and analytical batch processing across complex transaction stores.",
+      es: "Modelado y transformación de datos para conectar la operación con productos analíticos útiles.",
+      en: "Data modeling and transformation that connect daily operations with useful analytics products.",
     },
     skills: {
       en: [
@@ -126,8 +126,8 @@ export const skillDomains: SkillDomain[] = [
       en: "AI & Computer Vision",
     },
     description: {
-      es: "Integración de pipelines de visión por computadora, extracción documental OCR y modelos predictivos orientados a impacto de negocio.",
-      en: "Production computer vision, OCR extraction pipelines, and machine learning models tied directly to business KPIs.",
+      es: "OCR, visión por computadora e integraciones con IA para automatizar la revisión de documentos y apoyar decisiones.",
+      en: "OCR, computer vision and AI integrations that automate document review and support decisions.",
     },
     skills: {
       en: [
@@ -157,8 +157,8 @@ export const skillDomains: SkillDomain[] = [
       en: "Business Intelligence & Executive Analytics",
     },
     description: {
-      es: "Traducción de telemetría de negocio en tableros ejecutivos accionables y modelos de decisión para comités directivos.",
-      en: "Transforming raw business telemetry into actionable executive dashboards and decision models for leadership teams.",
+      es: "Segmentación de clientes y tableros ejecutivos para entender comportamientos y priorizar decisiones de negocio.",
+      en: "Customer segmentation and executive dashboards to understand behavior and guide business decisions.",
     },
     skills: {
       en: [
@@ -186,8 +186,8 @@ export const skillDomains: SkillDomain[] = [
       en: "Technical Leadership & Product",
     },
     description: {
-      es: "Coordinación de células técnicas, puente entre requerimientos de negocio y diseño de solución con mentalidad de ownership.",
-      en: "Leading engineering squads, bridging business objectives with pragmatic software design, and end-to-end technical ownership.",
+      es: "Coordinación de equipos y decisiones de arquitectura que conectan las necesidades del negocio con la entrega de software.",
+      en: "Team coordination and architecture decisions that connect business needs with software delivery.",
     },
     skills: {
       en: [

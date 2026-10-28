@@ -78,6 +78,22 @@ it.each([
       expect.stringContaining("luis-conferencia-selit.jpeg"),
     );
     expect(container.querySelectorAll("#projects article")).toHaveLength(3);
+    expect(container.querySelectorAll("#employment li")).toHaveLength(3);
+    expect(container.querySelector("#employment")).toHaveTextContent(
+      "Product Trainee → Product Analyst",
+    );
+    expect(container.querySelector("#employment")).toHaveTextContent(
+      locale === "es" ? "Mar 2026 — Actualidad" : "Mar 2026 — Present",
+    );
+    const cvLinks = screen.getAllByRole("link", {
+      name: locale === "es" ? /Descargar CV/ : /Download CV/,
+    });
+    expect(cvLinks).toHaveLength(2);
+    for (const link of cvLinks) {
+      expect(link).toHaveAttribute("download", "Luis-Elizondo-CV.pdf");
+      expect(link).toHaveAttribute("href", "/files/luis-elizondo-cv.pdf");
+    }
+    expect(container.querySelector("#contact a[download]")).toBeInTheDocument();
     expect(container.querySelector("#projects button")).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", {

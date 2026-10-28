@@ -1,0 +1,22 @@
+.timeline {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .timeline[data-motion="true"] > li > article {
+    transition: transform var(--motion-action-duration) var(--ease-portfolio);
+  }
+
+  .timeline[data-motion="true"] > li:hover > article {
+    transform: translateX(4px);
+  }
+
+  .timeline[data-motion="true"] > li [data-marker] {
+    transition: transform var(--motion-action-duration) var(--ease-portfolio);
+  }
+
+  .timeline[data-motion="true"] > li:hover [data-marker] {
+    transform: scale(1.15);
+  }
+}

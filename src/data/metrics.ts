@@ -24,8 +24,8 @@ export const impactMetrics: MetricItem[] = [
       es: "Automatización de validaciones",
     },
     copy: {
-      en: "Verification work handled through automation.",
-      es: "Trabajo de validación resuelto mediante automatización.",
+      en: "Signature volume automatically approved by the verification service.",
+      es: "Volumen de firmas aprobado automáticamente por el servicio de validación.",
     },
   },
   {
